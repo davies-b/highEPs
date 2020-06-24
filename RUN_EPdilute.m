@@ -2,7 +2,7 @@ clear, close all
 
 %% Parameter values
 eps = 0.01;             % 1/distance between resonators
-N = 4;                  % number of resonators
+N = 5;                  % number of resonators
 
 
 %%
@@ -10,16 +10,17 @@ N = 4;                  % number of resonators
 x0 = zeros(1,N);
 for n = 1:N
     if n == N
-        x0(n) = 1;              % guess 1 for gamma
+        x0(n) = 1;              % guess: gamma = 1
     elseif mod(n,2) == 0
-        x0(n) = 1;              % guess 1 for the real parts
+        x0(n) = 1;              % guess: real parts = 1
     else
-        x0(n) = eps;            % guess epsilon for the imaginary parts
+        x0(n) = eps;            % guess: imaginary parts = epsilon
     end
 end
 
 f = @(x) excep(N,x(1:end-1),x(end),eps);
-options = optimoptions('fsolve','display','iter','MaxFunctionEvaluations',n*1e3);
+options = optimoptions('fsolve','display','iter',...
+    'MaxFunEvals',N*1e3,'TolFun',1e-3);
 soln = fsolve(f,x0,options);
 
 disp('-- NUMERICAL VALUES --')
