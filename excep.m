@@ -26,11 +26,12 @@ end
 
 A = Cdv(N,vdel,eps);
 
-chp = charpoly(A);
+chpoly = charpoly(A);
+chpoly = chpoly(2:end);            % highest order coefficient is always 1
 
-goal = zeros(1,N+1);
-for n = 1:N+1
-    goal(n) = nchoosek(N,n-1)*(-gamma)^(n-1);
+goal = zeros(1,N);
+for n = 2:N+1
+    goal(n-1) = nchoosek(N,n-1)*(-gamma)^(n-1);
 end
 
-out = goal-chp;
+out = goal-chpoly;

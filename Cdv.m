@@ -8,6 +8,8 @@ else
     A = diag([vdel, fliplr(conj(vdel(1:end-1)))]);
 end
 
+% A = diag(vdel)
+
 if size(A) ~= [N N]
     disp('[Cdv.m] Warning: incorrect dimensions')
 end
