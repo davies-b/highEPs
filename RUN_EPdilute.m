@@ -1,8 +1,8 @@
 clear, close all
 
 %% Parameter values
-eps = 0.01;             % 1/distance between resonators
-N = 5;                  % number of resonators
+eps = 0.1;             % 1/distance between resonators
+N = 3;                  % number of resonators
 
 
 %%
@@ -16,7 +16,7 @@ for n = 1:N
     elseif mod(n,2) == 0
         x0(n) = 0;              % guess: real parts = 1
     else
-        x0(n) = 5*(N+1-n)*eps;            % guess: imaginary parts = O(epsilon)
+        x0(n) = (N+1-n)*eps;            % guess: imaginary parts = O(epsilon)
     end
 end
 
