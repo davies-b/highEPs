@@ -1,10 +1,11 @@
 clear, close all
 
+% Plots how the eigenvalues of the matrix Cdv vary as the gain/loss is
+% varied in an array of 3 resonators
+
 eps = 0.01;
 N = 3;
 c = 1+0.483*eps;
-% c = 1.0049
-% b = 1.53*eps;
 
 b_vals = eps*linspace(0.01,3,50);
 eigs_re = zeros(N,length(b_vals));
