@@ -1,4 +1,5 @@
 clear, close all
+% Attempt to find the points where the eigenvalues of C_d^v coalesce numerically
 
 %% Parameter values
 eps = 0.1;             % 1/distance between resonators
