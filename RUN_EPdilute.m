@@ -2,7 +2,7 @@ clear, close all
 % Attempt to find the points where the eigenvalues of C_d^v coalesce numerically
 
 %% Parameter values
-eps = 0.1;             % 1/distance between resonators
+eps = 0.01;             % 1/distance between resonators
 N = 3;                  % number of resonators
 
 
@@ -39,7 +39,6 @@ disp('-- NUMERICAL VALUES --')
 printresults(soln)
 
 %% Asymptotic formulas, for comparison (where possible)
-
 if N == 3
     p = [-8/27,0,-2,1];
     out = roots(p);
@@ -54,3 +53,18 @@ elseif N == 2
     printresults(asoln)
 end
 
+%% Tests
+pars = soln(1:end-1);
+vdel = [1+1i*pars(1)];
+n = 2;
+while n <= length(pars)
+    if n<length(pars)
+        vdel = [vdel, pars(n)+1i*pars(n+1)];
+        n = n + 2;
+    elseif n == length(pars)
+        vdel = [vdel, pars(n)];
+        n = n + 1;
+    end
+end
+
+A = Cdv(N,vdel,eps)
