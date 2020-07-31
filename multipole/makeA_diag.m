@@ -1,25 +1,12 @@
-function M = makeA_diag(R,k0,k1,k2,k3,delta,N_multi,SpecialFuncDataM,i)
+function M = makeA_diag(R,k0,kb,delta,N_multi,SpecialFuncDataM)
 % make the diagonal blocks of A
 
 Jdata_k0R=SpecialFuncDataM(:,1);
-if i == 1
-    Jdata_kbR=SpecialFuncDataM(:,2);
-    Hdata_kbR=SpecialFuncDataM(:,6);
-    dJdata_kbR=SpecialFuncDataM(:,9);
-    kb = k1;
-elseif i == 2
-    Jdata_kbR=SpecialFuncDataM(:,3);
-    Hdata_kbR=SpecialFuncDataM(:,7);
-    dJdata_kbR=SpecialFuncDataM(:,10);
-    kb = k2;
-elseif i == 3
-    Jdata_kbR=SpecialFuncDataM(:,4);
-    Hdata_kbR=SpecialFuncDataM(:,8);
-    dJdata_kbR=SpecialFuncDataM(:,11);
-    kb = k2;
-end
-Hdata_k0R=SpecialFuncDataM(:,5);
-dHdata_k0R=SpecialFuncDataM(:,12);
+Jdata_kbR=SpecialFuncDataM(:,2);
+Hdata_k0R=SpecialFuncDataM(:,3);
+Hdata_kbR=SpecialFuncDataM(:,4);
+dJdata_kbR=SpecialFuncDataM(:,5);
+dHdata_k0R=SpecialFuncDataM(:,6);
 
 const = -1i*R^2;
 
