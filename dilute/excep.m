@@ -1,13 +1,11 @@
-function out = excep_1(N, pars, gamma)
-%%% Old doc.
+function out = excep(N, pars, gamma)
 %%% Input
 % N: number of resonators
 % pars: the material parameters (denoted b,c,d,...) in the paper
 % gamma: the single eigenvalue
-% eps: 1/distance between the resonaots
 %%% Output
 % The difference between then polynomial coefficients of the characteristic
-% polynomial of $C_d^v$ and its desired form: (x-gamma)^N
+% polynomial of $C_{d,1}^v$ and its desired form: (x-gamma_1)^N
 
 if length(pars)~=N-1
     disp('[excep2.m] Warning: incorrect number of parameters given')
@@ -25,7 +23,7 @@ while n <= length(pars)
     end
 end
 
-M = Cdv_1(N,vdel_1);
+M = Cd1v(N,vdel_1);
 
 chpoly = charpoly(M);
 chpoly = chpoly(2:end);            % highest order coefficient is always 1

@@ -1,13 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Davies, B
+% Davies, B., Hiltunen, E.O.
 %
-% Computes the resonant frequencies of a pair of bubbles with complex
-% material coefficients. 
+% Computes the leading order approximation of the resonant frequencies of
+% an array of resonators with complex material coefficients. Plots the
+% frequencies as the gain/loss increases from 0 across an asymptotic exceptional point
 %
-% Details of the method are given in the appendices of Ammari, Davies,
-% Hiltunen & Yu (2019) "Topologically protected edge modes in..."
-%
+% Details of the method are given in Ammari et al. (2020) "High-order
+% exceptional points and enhanced sensing in subwavelength resonator arrays"
+%   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clear all, close all
@@ -18,7 +19,7 @@ even = mod(N,2) == 0;
 R = ones(1,N);               % vector of radii
 eps = 0.03;
 
-%%% Table of EPs 
+%%% Table of asymptotic EPs 
 if N == 3
     a1s = [0, 0.4832780319391283];
     b1s = [1.5257301701322068, 0];
@@ -40,9 +41,9 @@ elseif N == 5
 elseif N == 6
     a1s = [0, 0.7995091404934966, 1.053239878393793];
     b1s = [2.327472034904844, 1.2368578609510557, 0.39457913027490504];
-    
-    a1s = [0, 1.1261613883078554, 2.2685379181629015];
-    b1s = [1.8426158523313096, -2.0774764216154256, 1.1663480769378682];
+%     
+%     a1s = [0, 1.1261613883078554, 2.2685379181629015];
+%     b1s = [1.8426158523313096, -2.0774764216154256, 1.1663480769378682];
 elseif N == 7
     a1s = [0, 0.8385269915559069, 1.1453819914774919, 1.2310017875661599];
     b1s = [2.4904839569124615, 1.465061374173415, 0.6949570191530565, 0];
@@ -50,13 +51,19 @@ elseif N == 8
     a1s = [0, 0.8675182070472637, 1.2106740992781007, 1.3486427522363564];
     b1s = [2.6275619089267157, 1.6526158002508826, 0.9354747163943931, 0.3042088404629951];
 
-    a1s = [0, 1.71017, 1.08543, 2.71187];
-    b1s = [2.16684,-1.86197, 1.99683, -1.10729];
+%     a1s = [0, 1.71017, 1.08543, 2.71187];
+%     b1s = [2.16684,-1.86197, 1.99683, -1.10729];
+%     
+%     a1s = [0, -2.337573, -0.524136, -1.220064];
+%     b1s = [0.455674, -2.492540, 1.440055,-2.017342];
 elseif N == 14
     a1s = [0, 0.956620, 1.396629, 1.654193, 1.813961, 1.908746, 1.953199];
     b1s = [3.163613, 2.354460, 1.797260, 1.337931, 0.928904, 0.547786, 0.181099];
+    
+%     a1s = [0, -1.004371, -1.299028, -3.281664, -0.020124, -1.739938, -0.484783];
+%     b1s = [0.223134, -2.003327, 2.024189, -2.997677, 0.897483, -2.398478, 1.754378];
 else
-    disp('error')
+    disp('error: no tabulated EP data')
 end
 
 %%% Material parameters
@@ -74,7 +81,7 @@ kappa0 = high;
 N_multi = 3;
 
 % Loop parameters
-M = 1000;
+M = 1000; % Assume M is even 
 tau_vals = linspace(0,2,M);
 
 %% Compute the resonances
@@ -82,7 +89,7 @@ res_store = zeros(N,M);
 for m = 1:M
     tau = tau_vals(m);
     vdel_1 = a1s + tau*1i*b1s;
-    A = Cdv_1(N, vdel_1);
+    A = Cd1v(N, vdel_1);
     eval = eig(A);
     resonances = sqrt(3*delta*(1+eps*eval));
     res_store(:,m) = resonances;
@@ -116,14 +123,12 @@ for i = 1:N
     plot(tau_vals,imag(res_store(i,:)),'r');
 end
 subplot(2,1,1)
-%leg = legend('Real part','Imaginary part','interpreter','latex','Location','east');
 ylabel('Real part','interpreter','latex')
 ax = gca;
 ax.YAxis.Exponent = -2;
 set(gca,'ticklabelinterpreter','latex')
 set(gca, 'FontSize',16)
 subplot(2,1,2)
-%leg = legend('Real part','Imaginary part','interpreter','latex','Location','east');
 xlabel('Gain/Loss $\tau$','interpreter','latex')
 ylabel('Imaginary part','interpreter','latex')
 set(gca,'ticklabelinterpreter','latex')

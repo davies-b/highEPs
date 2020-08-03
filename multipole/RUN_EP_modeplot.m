@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Davies, B
+% Davies, B., Hiltunen, E.O.
 %
 % Plots the eigenmode (squared) for the exceptional points in arrays of 
 % three or four resonators, based on the asymptotic values.
@@ -35,8 +35,8 @@ rhob = ones(1,N);
 rho0 = high;
 
 kappa0 = high;
-kappaEP = zeros(1,N);
-%%% Numbers from asyptotics in Mathematica:
+kappab = zeros(1,N);
+%%% Precomputed EP data
 if N == 3
     a1s = [0, 0.4832780319391283];
     b1s = [1.5257301701322068, 0];
@@ -46,31 +46,28 @@ elseif N == 4
         a1s = [0, 0.653857921541393];
         b1s = [1.8727446815685915, 0.5636519844273622];
     elseif option == 2
-        a1s = [0, -0.863];
-        b1s = [0.0456, 2.00];
+        a1s = [0, -0.8628981032057736];
+        b1s = [0.045594766758086464, 1.9953267393119942];
     elseif option == 3
-        a1s = [0, 1.07];
-        b1s = [1.70, -1.13];
+        a1s = [0, 1.0660466602568839];
+        b1s = [1.7017496802269811, -1.132866663769782];
     elseif option == 4
-        a1s = [0, -1.15];
-        b1s = [0.734, -1.93];
+        a1s = [0, -1.1541795039569698];
+        b1s = [0.7341129919407204, -1.9334565911476076];
     end
     omega = sqrt(3/2*(a1s(2)*eps+2)/high);
 end
 
 for i = 1:N/2
-    kappaEP(i) = 1 + a1s(i)*eps + 1i*b1s(i)*eps;
+    kappab(i) = 1 + a1s(i)*eps + 1i*b1s(i)*eps;
 end
 if even
-    kappaEP(N/2+1:end) = fliplr(conj(kappaEP(1:N/2)));
+    kappab(N/2+1:end) = fliplr(conj(kappab(1:N/2)));
 else
     i = (N+1)/2;
-    kappaEP(i) = 1 + a1s(i)*eps;
-    kappaEP(i+1:end) = fliplr(conj(kappaEP(1:i-1)));
+    kappab(i) = 1 + a1s(i)*eps;
+    kappab(i+1:end) = fliplr(conj(kappab(1:i-1)));
 end
-
-kappab = real(kappaEP) + 1i*imag(kappaEP);
-
 
 %% Plot the eigenmode
 
