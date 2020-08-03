@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Davies, B., Hiltunen, E.O.
+% Davies, B. and Hiltunen, E.O.
 %
 % Computes the leading order approximation of the resonant frequencies of
 % an array of resonators with complex material coefficients. Plots the

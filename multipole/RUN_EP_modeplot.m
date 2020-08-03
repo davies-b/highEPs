@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Davies, B., Hiltunen, E.O.
+% Davies, B. and Hiltunen, E.O.
 %
 % Plots the eigenmode (squared) for the exceptional points in arrays of 
 % three or four resonators, based on the asymptotic values.
@@ -69,7 +69,7 @@ else
     kappab(i+1:end) = fliplr(conj(kappab(1:i-1)));
 end
 
-%% Plot the eigenmode
+%% Compute the eigenmode in a plane
 
 N_multi = 0;
 A = MakeA(R,omega,rho0,rhob,kappa0,kappab,N_multi,cx,cy);
@@ -127,7 +127,7 @@ parfor j = 1:gridPointsN
         u(j) = S;
     end
 end
-%%
+%% Plotting
 fsz = 16;
 
 uTotal = reshape(u, [gridN gridN]);
