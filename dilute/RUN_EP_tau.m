@@ -14,19 +14,22 @@
 clear all, close all
 
 %%% Resonator geometry
-N = 6;                       % number of domain components / bubbles
+N = 2;                       % number of domain components / bubbles
 even = mod(N,2) == 0;
 R = ones(1,N);               % vector of radii
 eps = 0.03;
 
 %%% Table of asymptotic EPs 
-if N == 3
+if N == 2
+    a1s = [0];
+    b1s = [1];
+elseif N == 3
     a1s = [0, 0.4832780319391283];
     b1s = [1.5257301701322068, 0];
 elseif N == 4
     a1s = [0, 0.653857921541393];
     b1s = [1.8727446815685915, 0.5636519844273622];
-    
+   
 %     a1s = [0, -0.8628981032057736];
 %     b1s = [0.045594766758086464, 1.9953267393119942];
 %     
