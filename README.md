@@ -8,12 +8,6 @@ Please cite the following reference when using this source:
 # highEPs/dilute
 
 This code studies the dilute weighted capacitance matrix, using the approximation for the capacitance coefficients (Lemma 1 in [1]) given by:
-```math
-\begin{equation}
-C_{ij} = \begin{cases}
-\mathrm{Cap}_B + O(\epsilon^2), &\quad i=j,
-\\
--\epsilon \frac{(\mathrm{Cap}_B)^2}{4\pi |z_i-z_j|} + O(\epsilon^2), &\quad i\neq j,
-\end{cases}
-\end{equation}
+```
+C<sub>&ij; = 
 ```
